@@ -25,6 +25,30 @@ export default class PortfolioForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.componentConfig = this.componentConfig.bind(this);
     this.djsConfig = this.djsConfig.bind(this);
+    this.handleThumbDrop = this.handleThumbDrop.bind(this);
+    this.handleBannerDrop = this.handleBannerDrop.bind(this);
+    this.handleLogoDrop = this.handleLogoDrop.bind(this);
+
+  }
+
+  handleThumbDrop() {
+    return {
+      //The handleThumpDrop is going to pass through the dropZoneComponent and it will look inside the return statement and find the addedFile and run it.
+      addedfile: file => this.setState({ thumb_image: file })
+    }
+  }
+
+  handleBannerDrop() {
+    return {
+      addedfile: file => this.setState({ banner_image: file })
+    }
+  }
+
+  
+  handleLogoDrop() {
+    return {
+      addedfile: file => this.setState({ logo: file })
+    }
   }
 
   componentConfig() {
@@ -45,11 +69,23 @@ export default class PortfolioForm extends Component {
   buildForm() {
     let formData = new FormData();
 
+    //connects state to the item
     formData.append("portfolio_item[name]", this.state.name);
     formData.append("portfolio_item[description]", this.state.description);
     formData.append("portfolio_item[url]", this.state.url);
     formData.append("portfolio_item[category]", this.state.category);
     formData.append("portfolio_item[position]", this.state.position);
+
+    if (this.state.thumb_image) {
+      formData.append("portfolio_item[thumb_image]", this.state.thumb_image);
+
+    }
+
+    if (this.state.banner_image) {
+      formData.append("portfolio_item[banner_image]", this.state.banner_image);
+
+    }
+
 
     return formData;
   }
@@ -134,6 +170,25 @@ export default class PortfolioForm extends Component {
             <DropzoneComponent
             config={this.componentConfig()}
             djsConfig ={this.djsConfig()}
+            //Dropzone would not understand handleThumbDrop
+            eventHandlers = {this.handleThumbDrop()}
+            >
+
+            </DropzoneComponent>
+            <DropzoneComponent
+            config={this.componentConfig()}
+            djsConfig ={this.djsConfig()}
+            //Dropzone would not understand handleBannerDrop
+            eventHandlers = {this.handleBannerDrop()}
+            >
+
+            </DropzoneComponent>
+
+            <DropzoneComponent
+            config={this.componentConfig()}
+            djsConfig ={this.djsConfig()}
+            //Dropzone would not understand handleLogoDrop
+            eventHandlers = {this.handleLogoDrop()}
             >
 
             </DropzoneComponent>
