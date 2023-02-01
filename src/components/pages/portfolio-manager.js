@@ -21,7 +21,7 @@ export default class PortfolioManager extends Component {
         //update the portfolioItems state
         //and add the portfolioItem to the lsit
         //concat is short for concatination and it combines
-   handleSuccessfulFormSubmission(portfolioItem) {
+    handleSuccessfulFormSubmission(portfolioItem) {
         this.setState({
         portfolioItems: [portfolioItem].concat(this.state.portfolioItems)
         });
