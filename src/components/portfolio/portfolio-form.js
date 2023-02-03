@@ -132,96 +132,93 @@ export default class PortfolioForm extends Component {
 
   render() {
     return (
-      <div>
-        <h1>PortfolioForm</h1>
 
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <input
-              type="text"
-              name="name"
-              placeholder="Portfolio Item Name"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
+      <form onSubmit={this.handleSubmit} className="portfolio-form-wrappper">
+        <div>
+          <input
+            type="text"
+            name="name"
+            placeholder="Portfolio Item Name"
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
 
-            <input
-              type="text"
-              name="url"
-              placeholder="URL"
-              value={this.state.url}
-              onChange={this.handleChange}
-            />
-          </div>
+          <input
+            type="text"
+            name="url"
+            placeholder="URL"
+            value={this.state.url}
+            onChange={this.handleChange}
+          />
+        </div>
 
-          <div>
-            <input
-              type="text"
-              name="position"
-              placeholder="Position"
-              value={this.state.position}
-              onChange={this.handleChange}
-            />
+        <div>
+          <input
+            type="text"
+            name="position"
+            placeholder="Position"
+            value={this.state.position}
+            onChange={this.handleChange}
+          />
 
-            <select
-              name="category"
-              value={this.state.category}
-              onChange={this.handleChange}
-            >
-            <option value="Goverment">Goverment</option> 
-            <option value="Private Sector">Private Sector</option>
-            <option value="Contractor">Contractor</option>
+          <select
+            name="category"
+            value={this.state.category}
+            onChange={this.handleChange}
+          >
+          <option value="Goverment">Goverment</option> 
+          <option value="Private Sector">Private Sector</option>
+          <option value="Contractor">Contractor</option>
 
-            </select>
+          </select>
 
-          </div>
+        </div>
 
-          <div>
-            <textarea
-              type="text"
-              name="description"
-              placeholder="Description"
-              value={this.state.description}
-              onChange={this.handleChange}
-            />
-          </div>
+        <div>
+          <textarea
+            type="text"
+            name="description"
+            placeholder="Description"
+            value={this.state.description}
+            onChange={this.handleChange}
+          />
+        </div>
 
-          <div className="image-uploaders">
-            <DropzoneComponent
-            ref={this.thumbRef}
-            config={this.componentConfig()}
-            djsConfig ={this.djsConfig()}
-            //Dropzone would not understand handleThumbDrop
-            eventHandlers = {this.handleThumbDrop()}
-            >
+        <div className="image-uploaders">
+          <DropzoneComponent
+          ref={this.thumbRef}
+          config={this.componentConfig()}
+          djsConfig ={this.djsConfig()}
+          //Dropzone would not understand handleThumbDrop
+          eventHandlers = {this.handleThumbDrop()}
+          >
 
-            </DropzoneComponent>
-            <DropzoneComponent
-            ref={this.bannerRef}
-            config={this.componentConfig()}
-            djsConfig ={this.djsConfig()}
-            //Dropzone would not understand handleBannerDrop
-            eventHandlers = {this.handleBannerDrop()}
-            >
+          </DropzoneComponent>
+          <DropzoneComponent
+          ref={this.bannerRef}
+          config={this.componentConfig()}
+          djsConfig ={this.djsConfig()}
+          //Dropzone would not understand handleBannerDrop
+          eventHandlers = {this.handleBannerDrop()}
+          >
 
-            </DropzoneComponent>
+          </DropzoneComponent>
 
-            <DropzoneComponent
-            ref={this.logoRef}
-            config={this.componentConfig()}
-            djsConfig ={this.djsConfig()}
-            //Dropzone would not understand handleLogoDrop
-            eventHandlers = {this.handleLogoDrop()}
-            >
+          <DropzoneComponent
+          ref={this.logoRef}
+          config={this.componentConfig()}
+          djsConfig ={this.djsConfig()}
+          //Dropzone would not understand handleLogoDrop
+          eventHandlers = {this.handleLogoDrop()}
+          >
 
-            </DropzoneComponent>
-          </div>
+          </DropzoneComponent>
+        </div>
 
-          <div>
-            <button type="submit">Save</button>
-          </div>
-        </form>
-      </div>
+        <div>
+          <button type="submit">Save</button>
+        </div>
+      </form>
     );
   }
 }
