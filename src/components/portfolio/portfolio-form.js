@@ -29,6 +29,11 @@ export default class PortfolioForm extends Component {
     this.handleBannerDrop = this.handleBannerDrop.bind(this);
     this.handleLogoDrop = this.handleLogoDrop.bind(this);
 
+    this.thumbRef = React.createRef();
+    this.bannerRef = React.createRef();
+    this.logoRef = React.createRef();
+
+
   }
 
   handleThumbDrop() {
@@ -103,6 +108,21 @@ export default class PortfolioForm extends Component {
     { withCredentials: true }
     ).then(response => {
         this.props.handleSuccessfulFormSubmission(response.data.portfolio_item)
+
+        this.setState({
+          name: "",
+          description: "",
+          category: "Goverment",
+          position: "",
+          url: "",
+          thumb_image: "",
+          banner_image: "",
+          logo: ""
+        });
+
+        [this.thumbRef, this.bannerRef, this.logoRef].forEach(ref => {
+          ref.current.dropzone.removeAllFiles();
+        })
     }).catch(error => {
         console.log("Portfolio from handleSubmit error", error)
     })
@@ -168,6 +188,7 @@ export default class PortfolioForm extends Component {
 
           <div className="image-uploaders">
             <DropzoneComponent
+            ref={this.thumbRef}
             config={this.componentConfig()}
             djsConfig ={this.djsConfig()}
             //Dropzone would not understand handleThumbDrop
@@ -176,6 +197,7 @@ export default class PortfolioForm extends Component {
 
             </DropzoneComponent>
             <DropzoneComponent
+            ref={this.bannerRef}
             config={this.componentConfig()}
             djsConfig ={this.djsConfig()}
             //Dropzone would not understand handleBannerDrop
@@ -185,6 +207,7 @@ export default class PortfolioForm extends Component {
             </DropzoneComponent>
 
             <DropzoneComponent
+            ref={this.logoRef}
             config={this.componentConfig()}
             djsConfig ={this.djsConfig()}
             //Dropzone would not understand handleLogoDrop
