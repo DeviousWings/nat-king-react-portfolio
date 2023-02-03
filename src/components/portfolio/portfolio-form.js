@@ -165,6 +165,7 @@ export default class PortfolioForm extends Component {
             name="category"
             value={this.state.category}
             onChange={this.handleChange}
+            className="select-element"
           >
           <option value="Goverment">Goverment</option> 
           <option value="Private Sector">Private Sector</option>
