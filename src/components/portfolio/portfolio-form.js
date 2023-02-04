@@ -185,7 +185,7 @@ export default class PortfolioForm extends Component {
           />
         </div>
 
-        <div className="image-uploaders three-column ">
+        <div className="image-uploaders">
           <DropzoneComponent
           ref={this.thumbRef}
           config={this.componentConfig()}
@@ -217,7 +217,7 @@ export default class PortfolioForm extends Component {
         </div>
 
         <div>
-          <button type="submit">Save</button>
+          <button type="submit" className="button">Save</button>
         </div>
       </form>
     );

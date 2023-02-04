@@ -41,3 +41,9 @@
         }
     }
 }
+
+@mixin base-grid() {
+    display: grid;
+    grid-gap: 21px;
+
+}
