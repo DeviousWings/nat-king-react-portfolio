@@ -133,7 +133,7 @@ export default class PortfolioForm extends Component {
   render() {
     return (
 
-      <form onSubmit={this.handleSubmit} className="portfolio-form-wrappper">
+      <form onSubmit={this.handleSubmit} className="portfolio-form-wrapper">
         <div className="two-column">
           <input
             type="text"
@@ -193,8 +193,10 @@ export default class PortfolioForm extends Component {
           //Dropzone would not understand handleThumbDrop
           eventHandlers = {this.handleThumbDrop()}
           >
-
-          </DropzoneComponent>
+          <div className="dz-message">
+          Thumbnail
+          </div>          
+         </DropzoneComponent>
           <DropzoneComponent
           ref={this.bannerRef}
           config={this.componentConfig()}
@@ -202,6 +204,9 @@ export default class PortfolioForm extends Component {
           //Dropzone would not understand handleBannerDrop
           eventHandlers = {this.handleBannerDrop()}
           >
+          <div className="dz-message">
+          Banner
+          </div>  
 
           </DropzoneComponent>
 
@@ -212,12 +217,16 @@ export default class PortfolioForm extends Component {
           //Dropzone would not understand handleLogoDrop
           eventHandlers = {this.handleLogoDrop()}
           >
+          <div className="dz-message">
+          Logo
+          </div>  
+
 
           </DropzoneComponent>
         </div>
 
         <div>
-          <button type="submit" className="button">Save</button>
+          <button type="submit" className="btn">Save</button>
         </div>
       </form>
     );
