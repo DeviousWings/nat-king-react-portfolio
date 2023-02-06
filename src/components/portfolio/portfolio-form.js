@@ -17,7 +17,10 @@ export default class PortfolioForm extends Component {
       url: "",
       thumb_image: "",
       banner_image: "",
-      logo: ""
+      logo: "",
+      editMode: false,
+      apiUrl: "https://natking.devcamp.space/portfolio/portfolio_items",
+      apiAction: 'post'
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -47,13 +50,19 @@ export default class PortfolioForm extends Component {
         logo_url
       } = this.props.portfolioToEdit;
 
+
+      this.props.clearPortfolioToEdit();;
+
       this.setState({
         id: id,
         name: name || "",
         description: description || "",
         category: category || "eCommerce",
         position: position || "",
-        url: url || ""
+        url: url || "",
+        editMode: true,
+        apiUrl: `https://natking.devcamp.space/portfolio/portfolio_items${id}`,
+        apiAction: 'post'
       });
     }
   }
@@ -121,11 +130,14 @@ export default class PortfolioForm extends Component {
     });
   }
 
+
   handleSubmit(event) {
-    axios.post("https://natking.devcamp.space/portfolio/portfolio_items", 
-        this.buildForm(),
-        { withCredentials: true }
-      )
+    axios({
+      method: this.state.apiAction,
+      url: this.state.apiUrl,
+      data: this.buildForm(),
+      withCredentials: true
+    })
       .then(response => {
         this.props.handleSuccessfulFormSubmission(response.data.portfolio_item);
 
