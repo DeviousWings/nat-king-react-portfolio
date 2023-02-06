@@ -9,13 +9,29 @@ export default class PortfolioManager extends Component {
         super();
 
         this.state = {
-            portfolioItems: []
+            portfolioItems: [],
+            portfolioToEdit: {}
         };
 
         this.handleSuccessfulFormSubmission = this.handleSuccessfulFormSubmission.bind(this);
         this.handleFormSubmissionError = this.handleFormSubmissionError.bind(this);
         this.handleDeleteClick = this.handleDeleteClick.bind(this);
+        this.handleEditClick = this.handleDeleteClick.bind(this);
+        this.clearPortfolioToEdit = this.clearPortfolioToEdit.bind(this);
         
+    }
+
+    clearPortfolioToEdit() {
+      this.setState({
+        portfolioToEdit: {}
+
+      });
+    }
+
+    handleEditClick(portfolioItem) {
+      this.setState({
+        portfolioToEdit: portfolioItem
+      });
     }
 
     handleDeleteClick(portfolioItem) {
@@ -51,8 +67,8 @@ export default class PortfolioManager extends Component {
 
 
     getPortfolioItems() {
-        //?order_by=created_at& you added. spearation is the &
-        axios.get("https://natking.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc",         {
+        axios.get("https://natking.devcamp.space/portfolio/portfolio_items?order_by=created_at&direction=desc",         
+          {
             withCredentials: true
           }
         )
@@ -77,6 +93,8 @@ export default class PortfolioManager extends Component {
             <PortfolioForm
               handleSuccessfulFormSubmission={this.handleSuccessfulFormSubmission}
               handleFormSubmissionError={this.handleFormSubmissionError}
+              clearPortfolioToEdit={this.clearPortfolioToEdit}
+              portfolioToEdit={this.state.portfolioToEdit}
             />
           </div>
   
@@ -84,7 +102,7 @@ export default class PortfolioManager extends Component {
             <PortfolioSidebarList
               handleDeleteClick={this.handleDeleteClick}
               data={this.state.portfolioItems}
-            />
+              handleEditClick={this.handleEditClick}/>
           </div>
         </div>
       );
