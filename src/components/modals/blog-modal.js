@@ -26,7 +26,7 @@ export default class BlogModal extends Component {
     this.handleSucFormSub = this.handleSucFormSub.bind(this);
   }
 
-  handleSucFormSub() {
+  handleSucFormSub(blog) {
     console.log("blog from blog form", blog);
   }
 

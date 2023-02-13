@@ -9,10 +9,16 @@ export default class BlogForm extends Component {
       blog_status: "",
     };
 
-    this.handleCahge = this.handleCahge.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleCahge(event) {
+  handleSubmit(event) {
+    this.props.handleSucFormSub(this.state);
+    event.preventDefault();
+  }
+
+  handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -20,9 +26,22 @@ export default class BlogForm extends Component {
 
   render() {
     return (
-      <form>
-        <input onChange={this.handleCahge} type="text" />
-        <input type="text" />
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          onChange={this.handleChange}
+          name="title"
+          placeholder="Blog Title"
+          value={this.state.title}
+        />
+
+        <input
+          type="text"
+          onChange={this.handleChange}
+          name="blog_status"
+          placeholder="Blog status"
+          value={this.state.blog_status}
+        />
 
         <button>Save</button>
       </form>
