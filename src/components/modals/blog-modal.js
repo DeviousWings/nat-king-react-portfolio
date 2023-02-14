@@ -27,7 +27,7 @@ export default class BlogModal extends Component {
   }
 
   handleSucFormSub(blog) {
-    console.log("blog from blog form", blog);
+    this.props.handleSucNewBlogSub(blog);
   }
 
   render() {
@@ -37,8 +37,7 @@ export default class BlogModal extends Component {
         onRequestClose={() => {
           this.props.handleModalClose();
         }}
-        isOpen={this.props.modalIsOpen}
-      >
+        isOpen={this.props.modalIsOpen}>
         <BlogForm handleSucFormSub={this.handleSucFormSub} />
       </ReactModal>
     );

@@ -22,6 +22,14 @@ class Blog extends Component {
     window.addEventListener("scroll", this.onScroll, false);
     this.handleNewBlogClick = this.handleNewBlogClick.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
+    this.handleSucNewBlogSub = this.handleSucNewBlogSub.bind(this);
+  }
+
+  handleSucNewBlogSub(blog) {
+    this.setState({
+      blogModalIsOpen: false,
+      blogItems: [blog].concat(this.state.blogItems),
+    });
   }
 
   handleModalClose() {
@@ -64,7 +72,7 @@ class Blog extends Component {
           withCredentials: true,
         }
       )
-      .then((response) => {
+      .then(response => {
         console.log("gettting", response.data);
         this.setState({
           blogItems: this.state.blogItems.concat(response.data.portfolio_blogs),
@@ -72,7 +80,7 @@ class Blog extends Component {
           isLoading: false,
         });
       })
-      .catch((error) => {
+      .catch(error => {
         console.log("getBlogItems error", error);
       });
   }
@@ -86,25 +94,26 @@ class Blog extends Component {
   }
 
   render() {
-    const blogRecords = this.state.blogItems.map((blogItem) => {
+    const blogRecords = this.state.blogItems.map(blogItem => {
       return <BlogItem key={blogItem.id} blogItem={blogItem} />;
     });
 
     return (
-      <div className="blog-container">
+      <div className='blog-container'>
         <BlogModal
+          handleSucNewBlogSub={this.handleSucNewBlogSub}
           handleModalClose={this.handleModalClose}
           modalIsOpen={this.state.blogModalIsOpen}
         />
-        <div className="new-blog-link">
+        <div className='new-blog-link'>
           <a onClick={this.handleNewBlogClick}>Open Modal!</a>
         </div>
 
-        <div className="content-container">{blogRecords}</div>
+        <div className='content-container'>{blogRecords}</div>
 
         {this.state.isLoading ? (
-          <div className="content-loader">
-            <FontAwesomeIcon icon="spinner" spin />
+          <div className='content-loader'>
+            <FontAwesomeIcon icon='spinner' spin />
           </div>
         ) : null}
       </div>
