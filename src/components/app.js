@@ -8,6 +8,7 @@ import {
   faSignOutAlt,
   faEdit,
   faSpinner,
+  faPlusCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
 import NavigationContainer from "./navigation/navigation-container";
@@ -21,7 +22,7 @@ import PortfolioDetail from "./portfolio/portfolio-detail";
 import Auth from "./pages/auth";
 import NoMatch from "./pages/no-match";
 
-library.add(faTrash, faSignOutAlt, faEdit, faSpinner);
+library.add(faTrash, faSignOutAlt, faEdit, faSpinner, faPlusCircle);
 
 export default class App extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ export default class App extends Component {
       .get("https://api.devcamp.space/logged_in", {
         withCredentials: true,
       })
-      .then((response) => {
+      .then(response => {
         const loggedIn = response.data.logged_in;
         const loggedInStatus = this.state.loggedInStatus;
 
@@ -75,7 +76,7 @@ export default class App extends Component {
           });
         }
       })
-      .catch((error) => {
+      .catch(error => {
         console.log("Error", error);
       });
   }
@@ -87,8 +88,8 @@ export default class App extends Component {
   authorizedPages() {
     return [
       <Route
-        key="portfolio-manager"
-        path="/portfolio-manager"
+        key='portfolio-manager'
+        path='/portfolio-manager'
         component={PortfolioManager}
       />,
     ];
@@ -96,7 +97,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className='container'>
         <Router>
           <div>
             <NavigationContainer
@@ -105,11 +106,11 @@ export default class App extends Component {
             />
 
             <Switch>
-              <Route exact path="/" component={Home} />
+              <Route exact path='/' component={Home} />
 
               <Route
-                path="/auth"
-                render={(props) => (
+                path='/auth'
+                render={props => (
                   <Auth
                     {...props}
                     handleSuccessfulLogin={this.handleSuccessfulLogin}
@@ -118,16 +119,16 @@ export default class App extends Component {
                 )}
               />
 
-              <Route path="/about-me" component={About} />
-              <Route path="/contact" component={Contact} />
-              <Route path="/blog" component={Blog} />
-              <Route path="/b/:slug" component={BlogDetail} />
+              <Route path='/about-me' component={About} />
+              <Route path='/contact' component={Contact} />
+              <Route path='/blog' component={Blog} />
+              <Route path='/b/:slug' component={BlogDetail} />
               {this.state.loggedInStatus === "LOGGED_IN"
                 ? this.authorizedPages()
                 : null}
               <Route
                 exact2
-                path="/portfolio/:slug"
+                path='/portfolio/:slug'
                 component={PortfolioDetail}
               />
               <Route component={NoMatch} />
