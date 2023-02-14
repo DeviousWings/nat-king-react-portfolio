@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 export default class BlogForm extends Component {
   constructor(props) {
@@ -13,7 +14,29 @@ export default class BlogForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  buildForm() {
+    let formData = new FormData();
+
+    formData.append("portfolio_blog[title]", this.state.title);
+    formData.append("portfolio_blog[blog_status]", this.state.blog_status);
+
+    return formData;
+  }
+
   handleSubmit(event) {
+    axios
+      .post(
+        "https://natking.devcamp.space/portfolio/portfolio_blogs",
+        this.buildForm(),
+        { withCredentials: true }
+      )
+      .then(response => {
+        this.propshandleSucFormSub(response.data);
+      })
+      .catch(error => {
+        console.log("handleSubmit for blog error", error);
+      });
+
     this.props.handleSucFormSub(this.state);
     event.preventDefault();
   }
@@ -28,18 +51,18 @@ export default class BlogForm extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <input
-          type="text"
+          type='text'
           onChange={this.handleChange}
-          name="title"
-          placeholder="Blog Title"
+          name='title'
+          placeholder='Blog Title'
           value={this.state.title}
         />
 
         <input
-          type="text"
+          type='text'
           onChange={this.handleChange}
-          name="blog_status"
-          placeholder="Blog status"
+          name='blog_status'
+          placeholder='Blog status'
           value={this.state.blog_status}
         />
 
