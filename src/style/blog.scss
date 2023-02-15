@@ -15,7 +15,7 @@
       color: $teal;
       margin-right: 15px;
       margin-bottom: 15px;
-      transition: 0.5 ease-in-out;
+      transition: 0.5s ease-in-out;
 
       &:hover {
         color: $dark-teal;
@@ -43,6 +43,7 @@
     }
 
     .featured-image-wrapper {
+      
       img {
         margin: 15px 0px;
         width: 100%;
