@@ -11,5 +11,8 @@
     .image-uploaders {
       @include base-grid();
       grid-template-columns: 200px;
+      img {
+        height: 320px;
+      }
     }
   }

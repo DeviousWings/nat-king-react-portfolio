@@ -3,8 +3,8 @@ import ReactModal from "react-modal";
 
 import BlogForm from "../blog/blog-form";
 
-//Gets rid of warning "Please use `Modal.setAppElement(el)` or set `appElement={el}`." It is index.js
 ReactModal.setAppElement(".app-wrapper");
+
 export default class BlogModal extends Component {
   constructor(props) {
     super(props);
@@ -23,11 +23,12 @@ export default class BlogModal extends Component {
       },
     };
 
-    this.handleSucFormSub = this.handleSucFormSub.bind(this);
+    this.handleSuccessfullFormSubmission =
+      this.handleSuccessfullFormSubmission.bind(this);
   }
 
-  handleSucFormSub(blog) {
-    this.props.handleSucNewBlogSub(blog);
+  handleSuccessfullFormSubmission(blog) {
+    this.props.handleSuccessfulNewBlogSubmission(blog);
   }
 
   render() {
@@ -38,7 +39,9 @@ export default class BlogModal extends Component {
           this.props.handleModalClose();
         }}
         isOpen={this.props.modalIsOpen}>
-        <BlogForm handleSucFormSub={this.handleSucFormSub} />
+        <BlogForm
+          handleSuccessfullFormSubmission={this.handleSuccessfullFormSubmission}
+        />
       </ReactModal>
     );
   }
